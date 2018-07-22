@@ -12,7 +12,7 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '20px',
+    width: '600px',
     height: '35px',
   },
   h1: {
@@ -30,7 +30,7 @@ const CalendarDay = (props) => {
   return(
     <Grid item xs classes={{item: classes.gridItem}} >
       <Typography variant="body2" gutterBottom align="center">
-        {day.format('DD/MM/YYYY')}
+        {day.format('dddd Do MMMM YYYY DD/MM/YYYY')}
       </Typography>
     </Grid>
   );

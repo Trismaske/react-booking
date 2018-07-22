@@ -53,36 +53,42 @@ class ReactBooking extends React.Component {
   };
   render() {
     const startDay = moment().startOf('month');
+    console.log('Start Day: ', startDay.format('dddd Do MMMM YYYY'));
     const endDay = moment().endOf('month');
+    console.log('End Day: ', endDay.format('dddd Do MMMM YYYY'));
     let calendar = [];
     for(let day = startDay; day<endDay; day.add(1, 'd')){
-      calendar.push(day);
+      calendar.push(moment(day));
     }
     console.log('calendar: ', calendar);
+    console.log('First Day of Month: ', calendar[0].format('dddd Do MMMM YYYY'));
+    console.log('Size: ', calendar[0].isoWeekday() - 1);
+    console.log('Last Day of Month: ', calendar[calendar.length-1].format('dddd Do MMMM YYYY'));
+    console.log('Size: ', calendar[calendar.length-1].isoWeekday() - 1);
 
     const { classes } = this.props;
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     return (
       <div className={classes.root}>
-        <Paper className={classes.mainPaper}>
-          <AppBar position="static" color="default">
-            <Toolbar>
-              <Typography variant="title" color="inherit">
-                {'React Booking for ' + moment().format('MMMM')}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Grid container className={classes.mainGridContainer}>
-            <Grid container className={classes.headingGridContainer}>
-              {days.length && days.map((day, index) => <Grid item xs classes={{item: classes.dayHeadingItem}} key={index}><Typography variant="title" gutterBottom>{day}</Typography></Grid>)}
-            </Grid>
-            <Grid container className={classes.dayGridContainer}>
-              {calendar.map((day, index) => <CalendarDay day={day} key={index}/>)}
-            </Grid>    
-          </Grid>
-        </Paper>
+      <Paper className={classes.mainPaper}>
+      <AppBar position="static" color="default">
+      <Toolbar>
+      <Typography variant="title" color="inherit">
+      {'React Booking for ' + moment().format('MMMM')}
+      </Typography>
+      </Toolbar>
+      </AppBar>
+      <Grid container className={classes.mainGridContainer}>
+      <Grid container className={classes.headingGridContainer}>
+      {days.length && days.map((day, index) => <Grid item xs classes={{item: classes.dayHeadingItem}} key={index}><Typography variant="title" gutterBottom>{day}</Typography></Grid>)}
+      </Grid>
+      <Grid container className={classes.dayGridContainer}>
+      {calendar.map((day, index) => <CalendarDay day={day} key={index}/>)}
+      </Grid>    
+      </Grid>
+      </Paper>
       </div>
-    );
+      );
   }
 }
 
